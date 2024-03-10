@@ -547,20 +547,20 @@ span.psw {
         </style>
     </head>
 <body>
-  <div style="background-color:rgba(255, 255, 255, .6);text-align: center; font-size: xx-large;font-family: 'Times New Roman', Times, serif;font-weight: bolder;"><br><%= Header.content1 %></div>
-  <div style="background-color:rgba(255, 255, 255, .6);text-align: center; font-size: large;font-family: 'Times New Roman', Times, serif;font-weight: bold;"><br><%= Header.content2 %><br><br></div>
-    <hr><div class="topnav" id="myTopnav">
-        <button class="btn3" onclick="redirectTo('/user/home', '<%= user.userID %>')">Home</button>
-        <button class="btn3" onclick="redirectTo('/user/aboutus', '<%= user.userID %>')">About</button>
-        <button class="btn3" onclick="redirectTo('/user/recipes', '<%= user.userID %>')">Recipes</button>
-        <button class="btn3" onclick="redirectTo('/user/search', '<%= user.userID %>')">Search</button>
+    <div style="background-color:rgba(255, 255, 255, .6);text-align: center; font-size: xx-large;font-family: 'Times New Roman', Times, serif;font-weight: bolder;"><br><%= Header.content1 %></div>
+    <div style="background-color:rgba(255, 255, 255, .6);text-align: center; font-size: large;font-family: 'Times New Roman', Times, serif;font-weight: bold;"><br><%= Header.content2 %><br><br></div>
+      <hr><div class="topnav" id="myTopnav">
+        <button class="btn3" onclick="redirectTo('/admin/home', '<%= user.userID %>')">Home</button>
+        <button class="btn3" onclick="redirectTo('/admin/aboutus', '<%= user.userID %>')">About</button>
+        <button class="btn3" onclick="redirectTo('/admin/recipes', '<%= user.userID %>')">Recipes</button>
+        <button class="btn3" onclick="redirectTo('/admin/search', '<%= user.userID %>')">Search</button>
+        <button class="btn3" onclick="redirectTo('/admin/validate', '<%= user.userID %>')">Validate</button>
         <div class="drop1">
           <button class="btn1" onclick="disp1()">Account <i class="fa fa-caret-down"></i></button>
           <div class="con1" id="drop1">
-            <button onclick="redirectTo('/user/liked', '<%= user.userID %>')"><i class="fa fa-heart-o" style="font-size:15px"></i> Liked</button>
-            <button class="btn3" onclick = "alert('Please upgrade your account to add your own recipe!')" > + recipe</button>
-            <button class="btn3" onclick="redirectTo('/user/upgradeacc', '<%= user.userID %>')"> Upgarde Acc</button>
-            <button class="btn3" onclick="redirectTo('/user/feedback', '<%= user.userID %>')">Feedback</button>
+            <button onclick="redirectTo('/admin/liked', '<%= user.userID %>')"><i class="fa fa-heart-o" style="font-size:15px"></i> Liked</button>
+            <button class="btn3" onclick="redirectTo('/admin/addrecipe', '<%= user.userID %>')" > + recipe</button>
+            <button class="btn3" onclick="redirectTo('/admin/feedback', '<%= user.userID %>')">Feedback</button>
             <button>Log Out</button>
           </div>
         </div> 

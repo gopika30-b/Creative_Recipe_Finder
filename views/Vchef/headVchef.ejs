@@ -547,9 +547,9 @@ span.psw {
         </style>
     </head>
 <body>
-  <div style="background-color:rgba(255, 255, 255, .6);text-align: center; font-size: xx-large;font-family: 'Times New Roman', Times, serif;font-weight: bolder;"><br>Creative - A place for different recipes</div>
-  <div style="background-color:rgba(255, 255, 255, .6);text-align: center; font-size: large;font-family: 'Times New Roman', Times, serif;font-weight: bold;"><br>"A recipe has no soul. YOU as the cook must bring SOUL to the recipe."<br><br></div>
-    <hr><div class="topnav" id="myTopnav">
+    <div style="background-color:rgba(255, 255, 255, .6);text-align: center; font-size: xx-large;font-family: 'Times New Roman', Times, serif;font-weight: bolder;"><br><%= Header.content1 %></div>
+    <div style="background-color:rgba(255, 255, 255, .6);text-align: center; font-size: large;font-family: 'Times New Roman', Times, serif;font-weight: bold;"><br><%= Header.content2 %><br><br></div>
+      <hr><div class="topnav" id="myTopnav">
         <button class="btn3" onclick="redirectTo('/vchef/home', '<%= user.userID %>')">Home</button>
         <button class="btn3" onclick="redirectTo('/vchef/aboutus', '<%= user.userID %>')">About</button>
         <button class="btn3" onclick="redirectTo('/vchef/recipes', '<%= user.userID %>')">Recipes</button>

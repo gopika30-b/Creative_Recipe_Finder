@@ -1,0 +1,35 @@
+<%- include('headAdmin.ejs') %>
+<h1>Create User Recipe</h1>
+<form action="/submit-recipe" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="userID" value="<%= user.userID %>">
+    <label for="recipeName">Recipe Name:</label>
+    <input type="text" id="recipeName" name="recipeName" required>
+    <br>
+    
+    <div id="ingredientsContainer">
+        <label for="ingredients">Ingredients:</label>
+        <div id="ingredientInputs">
+            <input type="text" class="ingredient-input" name="ingredientName" placeholder="Ingredient Name" required>
+            <input type="text" class="ingredient-input" name="ingredientQuantity" placeholder="Quantity" required>
+            <button type="button" onclick="addNewIngredient()">Add Ingredient</button>
+        </div>
+    </div>
+    <br>
+    
+    <div id="recipeStepsContainer">
+        <label for="recipeSteps">Recipe Steps:</label>
+        <div id="recipeStepsInputs">
+            <input type="text" class="recipe-step-input" name="recipeStep" placeholder="Recipe Step" required>
+            <button type="button" onclick="addNewRecipeStep()">Add Step</button>
+        </div>
+    </div>
+    <br>
+
+    <label for="image">Recipe Image:</label>
+    <input type="file" id="image" name="image" accept="image/*" required>
+    <br>
+
+    <button type="submit">Submit Recipe</button>
+</form>
+
+<%- include('footAdmin.ejs') %>

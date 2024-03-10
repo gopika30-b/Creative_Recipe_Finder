@@ -1,0 +1,19 @@
+<%- include('headAdmin.ejs') %>
+<% upiTransactions.forEach(transaction => { %>
+    <div>
+        <p>User ID: <%= transaction.userID %></p>
+        <p>Transaction ID: <%= transaction.transactionID %></p>
+        <!-- Displaying the image -->
+        <img src="<%= transaction.paymentScreenshot %>" alt="Payment Screenshot">
+        <!-- Buttons for Accept and Reject -->
+        <form action="/admin/accept" method="post">
+            <input type="hidden" name="userID" value="<%= transaction.userID %>">
+            <button type="submit">Accept</button>
+        </form>
+        <form action="/admin/reject" method="post">
+            <input type="hidden" name="userID" value="<%= transaction.userID %>">
+            <button type="submit">Reject</button>
+        </form>
+    </div>
+<% }); %>
+<%- include('footAdmin.ejs') %>

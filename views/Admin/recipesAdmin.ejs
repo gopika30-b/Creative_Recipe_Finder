@@ -1,0 +1,59 @@
+<%- include('headAdmin.ejs') %>
+<div class="g0" style="padding: 20px; border: 3px solid black;">
+    <h3>Snacks</h3>
+    <p>Snacks are like little bursts of happiness that can brighten up any day. They are the bite-sized superheroes of
+      the food world, providing us with the fuel we need to power through the day. They are the tasty sidekicks that
+      make our day-to-day adventures a little bit more exciting.</p>
+    <div class="row">
+      <% Adminrecipes.forEach(recipe=> { %>
+        <% if (recipe.category=="Snack" ) { %>
+          <div class="column">
+            <div class="card">
+              <img src="<%= recipe.imageSrc %>" alt="<%= recipe.pageTitle %>" width="200px" height="200px">
+              <div class="container">
+                <h4>
+                  <%= recipe.pageTitle %>
+                </h4>
+                <p class="title">
+                  <% recipe.hashtags.forEach(hash=> { %>
+                    <%= hash %>
+                      <% }); %>
+                </p>
+                <p><button class="button1" onclick="redirectTo('<%= recipe.rootURL %>', '<%= user.userID %>')">View</button></p>
+              </div>
+            </div>
+          </div>
+          <% } %>
+            <% }); %>
+    </div>
+  </div>
+
+  <div class="g0" style="padding: 20px; border: 3px solid black;">
+    <h3>Indian recipes</h3>
+    <p>Indian cuisine is known for its diversity, flavors, and spices. There are so many delicious Indian recipes that
+      are not only tasty but also fun to make. From the traditional biryanis to the street food favorites like chaat,
+      Indian food offers a wide range of options to satisfy any palate.</p>
+    <div class="row">
+      <% Adminrecipes.forEach(recipe=> { %>
+        <% if (recipe.category=="Indian recipe" ) { %>
+          <div class="column">
+            <div class="card">
+              <img src="<%= recipe.imageSrc %>" alt="<%= recipe.pageTitle %>" width="200px" height="200px">
+              <div class="container">
+                <h4>
+                  <%= recipe.pageTitle %>
+                </h4>
+                <p class="title">
+                  <% recipe.hashtags.forEach(hash=> { %>
+                    <%= hash %>
+                      <% }); %>
+                </p>
+                <p><button class="button1" onclick="redirectTo('<%= recipe.rootURL %>', '<%= user.userID %>')">View</button></p>
+              </div>
+            </div>
+          </div>
+          <% } %>
+            <% }); %>
+    </div>
+  </div>
+<%- include('footAdmin.ejs') %>

@@ -1,6 +1,6 @@
 <br><br>
 <footer>
-  <p>&copy; 2023 Creative. All rights reserved.</p>
+  <p><%= Footer.content1 %></p>
 </footer>
 <script>
   function signup() {
@@ -122,11 +122,15 @@
       }
       const { userType, userName, userID } = await response.json();
       let redirectURL = '';
-      if (userType === 'vchef') {
+      if (userType === 'admin') {
+        redirectURL = '/admin/recipes';
+        document.getElementById("log").style.display = "none";
+        alert(`Welcome ${userName} \u2714`);
+      } else if (userType === 'vchef'){
         redirectURL = '/vchef/recipes';
         document.getElementById("log").style.display = "none";
         alert(`Welcome ${userName} \u2714`);
-      } else {
+      }else{
         redirectURL = '/user/recipes';
         document.getElementById("log").style.display = "none";
         alert(`Welcome ${userName}!`);
