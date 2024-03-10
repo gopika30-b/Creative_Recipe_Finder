@@ -1,0 +1,134 @@
+<br><br>
+<footer>
+    <p>&copy; 2023 Creative. All rights reserved.</p>
+</footer>
+<script>
+    function likeUnlike(userID, recipeID) {
+        var userId = userID; 
+        var recipeId = recipeID; 
+        var likeIcon = document.getElementById('likeIcon');
+        fetch('/liked', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userId: userId,
+                recipeId: recipeId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'added') {
+                likeIcon.className = 'fa fa-heart';
+            } else if (data.status === 'removed') {
+                likeIcon.className = 'fa fa-heart-o';
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    };
+    function disp1() {
+        document.getElementById("drop1").classList.toggle("show");
+    }
+    function disp2() {
+        document.getElementById("drop2").classList.toggle("show");
+    }
+    window.onclick = function (event) {
+        var dropdowns1 = document.getElementsByClassName("con1");
+        var dropdowns2 = document.getElementsByClassName("con2");
+        if (!event.target.matches('.btn1') && !event.target.matches('.con2')) {
+            var i;
+            for (i = 0; i < dropdowns1.length; i++) {
+                var openDropdown1 = dropdowns1[i];
+                if (openDropdown1.classList.contains('show')) {
+                    openDropdown1.classList.remove('show');
+                }
+            }
+        }
+        if (!event.target.matches('.btn2') && !event.target.matches('.con1')) {
+            var j;
+            for (j = 0; j < dropdowns2.length; j++) {
+                var openDropdown2 = dropdowns2[j];
+                if (openDropdown2.classList.contains('show')) {
+                    openDropdown2.classList.remove('show');
+                }
+            }
+        }
+    }
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        }
+        else {
+            x.className = "topnav";
+        }
+    }
+    function redirectTo(url, userID) {
+        window.location.href = `${url}?userID=${userID}`;
+    }
+    function generateTXT() {
+        var checkedCheckboxes = document.querySelectorAll('input[type=checkbox]:checked');
+        var uncheckedCheckboxes = document.querySelectorAll('input[type="checkbox"]:not(:checked)');
+        var txtHead1 = 'Items to be bought :\n';
+        var txtHead2 = 'Items that are already available :\n';
+        var txtData1 = '';
+        var txtData2 = '';
+        var space = "\n";
+        checkedCheckboxes.forEach(function (checkbox) {
+            var item = checkbox.getAttribute("value");
+            txtData1 += item + "\n";
+        });
+        uncheckedCheckboxes.forEach(function (checkbox) {
+            var item = checkbox.getAttribute("value");
+            if (item) {
+                txtData2 += item + "\n";
+            }
+        });
+        var finalText = txtHead1 + txtData1 + space + txtHead2 + txtData2;
+        var outputElement = document.createElement("pre");
+        outputElement.textContent = finalText;
+        document.body.appendChild(outputElement);
+        var blob = new Blob([finalText], { type: "text;charset=utf-8" });
+        var url = URL.createObjectURL(blob);
+        var link = document.createElement("a");
+        link.href = url;
+        link.download = "buylist.txt";
+        link.click();
+    }
+
+function addNewIngredient() {
+    const ingredientsContainer = document.getElementById('ingredientsContainer');
+    const ingredientInputs = document.getElementById('ingredientInputs');
+    const newIngredientInput = document.createElement('div');
+    newIngredientInput.innerHTML = `
+        <input type="text" class="ingredient-input-name"  name="ingredientName" placeholder="Ingredient Name" required>
+        <input type="text" class="ingredient-input-quantity" name="ingredientQuantity" placeholder="Quantity" required>
+        <button type="button" onclick="removeIngredient(this)">Remove</button>
+    `;
+    ingredientsContainer.insertBefore(newIngredientInput, ingredientInputs.nextSibling);
+}
+
+function removeIngredient(button) {
+    const ingredientsContainer = document.getElementById('ingredientsContainer');
+    ingredientsContainer.removeChild(button.parentElement);
+}
+function addNewRecipeStep() {
+    const recipeStepsContainer = document.getElementById('recipeStepsContainer');
+    const recipeStepsInputs = document.getElementById('recipeStepsInputs');
+    const newStepInput = document.createElement('div');
+    newStepInput.innerHTML = `
+        <input type="text" class="recipe-step-input" name="recipeStep" placeholder="Recipe Step" required>
+        <button type="button" onclick="removeRecipeStep(this)">Remove</button>
+    `;
+    recipeStepsContainer.insertBefore(newStepInput, recipeStepsInputs.nextSibling);
+}
+
+function removeRecipeStep(button) {
+    const recipeStepsContainer = document.getElementById('recipeStepsContainer');
+    recipeStepsContainer.removeChild(button.parentElement);
+}
+</script>
+</body>
+
+</html>

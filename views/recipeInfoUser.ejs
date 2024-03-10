@@ -1,0 +1,33 @@
+<%- include('headUser.ejs') %>
+<div>
+    <h1 style="text-align: center;" id="recipeTitle">
+        <%= recipe.pageTitle %>
+        <i id="likeIcon" class="<%= isLiked ? 'fa fa-heart' : 'fa fa-heart-o' %>" style=" color:#FF4033;cursor: poi" onclick="likeUnlike('<%= user.userID %>', '<%= recipe._id %>')"></i>
+    </h1>
+<table border="3" width="25%" align="center" cellpadding="3" cellspacing="5">
+    <caption><h2>Ingredients</h2></caption>
+    <tr>
+        <th>Thing</th>
+        <th>Quantity</th>
+    </tr>
+    <% for (let i = 0; i < ingredients.length; i++) { %>
+    <tr>
+        <td><%= ingredients[i].name %></td>
+        <td><%= ingredients[i].quantity %></td>
+    </tr>
+    <% } %>
+</table>
+<br><br>
+<center>
+    <button onclick="redirectTo('<%= recipe.rootURL %>/buylist', '<%= user.userID %>')" class="bb1">Create Buy List</button></a>
+</center>
+<br><br>
+<h2>Recipe</h2>
+<ul type="square">
+    <% for (let i = 0; i < recipeSteps.length; i++) { %>
+    <br>
+    <li><%= recipeSteps[i] %></li><br>
+    <% } %>
+</ul>       
+</div>    
+<%- include('footUser.ejs') %>

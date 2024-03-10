@@ -1,0 +1,17 @@
+<%- include('head.ejs') %>
+  <div>
+    <form>
+      <h3>Choose required Ingredients :</h3> <br>
+      <div style="display: block; text-align: left; font-size: large; padding-left: 45%;">
+        <% for (let ingredient of ingredients) { %>
+          <label><input type="checkbox" value="<%= ingredient %>"><span> </span>
+            <%= ingredient %>
+          </label><br><br>
+          <% } %>
+      </div>
+      <br>
+      <hr><br>
+      <center><button onclick="generateTXT()" class="bb1">Download(.txt)</button></center><br><br>
+    </form>
+  </div>
+<%- include('foot.ejs') %>

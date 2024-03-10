@@ -1,0 +1,172 @@
+<br><br>
+<footer>
+  <p>&copy; 2023 Creative. All rights reserved.</p>
+</footer>
+<script>
+  function signup() {
+    document.getElementById('login-form').style.display = 'none';
+    var signup = document.getElementById('id02');
+    signup.style.display = 'block';
+  }
+  function disp1() {
+    document.getElementById("drop1").classList.toggle("show");
+  }
+  window.onclick = function (event) {
+    var dropdowns1 = document.getElementsByClassName("con1");
+    var dropdowns2 = document.getElementsByClassName("con2");
+    if (!event.target.matches('.btn1') && !event.target.matches('.con2')) {
+      var i;
+      for (i = 0; i < dropdowns1.length; i++) {
+        var openDropdown1 = dropdowns1[i];
+        if (openDropdown1.classList.contains('show')) {
+          openDropdown1.classList.remove('show');
+        }
+      }
+    }
+    if (!event.target.matches('.btn2') && !event.target.matches('.con1')) {
+      var j;
+      for (j = 0; j < dropdowns2.length; j++) {
+        var openDropdown2 = dropdowns2[j];
+        if (openDropdown2.classList.contains('show')) {
+          openDropdown2.classList.remove('show');
+        }
+      }
+    }
+  }
+  function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    }
+    else {
+      x.className = "topnav";
+    }
+  }
+  function closeModals() {
+    document.getElementById('id01').style.display = 'none';
+    document.getElementById('id02').style.display = 'none';
+  }
+  window.addEventListener('click', function (event) {
+    if (event.target === document.getElementById('id01') ||
+      event.target === document.getElementById('id02')) {
+      closeModals();
+    }
+  });
+  function stopPropagation(event) {
+    event.stopPropagation();
+  }
+  document.getElementById('login-form').addEventListener('click', stopPropagation);
+  document.getElementById('signup-form').addEventListener('click', stopPropagation);
+
+  document.getElementById("signup-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const fullName = document.getElementById("fname").value;
+    const userID = document.getElementById("userID1").value;
+    const password = document.getElementById("psw1").value.trim();;
+    const confirmPassword = document.getElementById("psw2").value.trim();;
+    if (password != confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+    const requestBody = {
+      fullName: fullName,
+      userID: userID,
+      password: password,
+    };
+    fetch("/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          alert("Signup successful!");
+          window.location.href = "/";
+        } else if (data.error) {
+          alert(data.error);
+        } else {
+          alert("An unknown error occurred");
+        }
+      })
+      .catch((error) => {
+        console.error("Error during signup:", error);
+        alert("An error occurred during signup. Please try again.");
+      });
+  });
+  document.getElementById("login-form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const userID2 = document.getElementById('userID2').value;
+    const psw = document.getElementById('psw').value;
+
+    const data = {
+      userID2,
+      psw
+    };
+
+    try {
+      const response = await fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        window.alert('Error: ' + error.error);
+        return;
+      }
+      const { userType, userName, userID } = await response.json();
+      let redirectURL = '';
+      if (userType === 'vchef') {
+        redirectURL = '/vchef/recipes';
+        document.getElementById("log").style.display = "none";
+        alert(`Welcome ${userName} \u2714`);
+      } else {
+        redirectURL = '/user/recipes';
+        document.getElementById("log").style.display = "none";
+        alert(`Welcome ${userName}!`);
+      }
+      window.location.href = `${redirectURL}?userID=${userID}`;
+
+    } catch (err) {
+      window.alert('Error during login. Please try again later.');
+    }
+  });
+  function generateTXT() {
+  var checkedCheckboxes = document.querySelectorAll('input[type=checkbox]:checked');
+  var uncheckedCheckboxes = document.querySelectorAll('input[type="checkbox"]:not(:checked)');
+  var txtHead1 = 'Items to be bought :\n';
+  var txtHead2 = 'Items that are already available :\n';
+  var txtData1 = '';
+  var txtData2 = '';
+  var space = "\n";
+  checkedCheckboxes.forEach(function(checkbox) {
+    var item = checkbox.getAttribute("value");
+    txtData1 += item + "\n";
+  });
+  uncheckedCheckboxes.forEach(function(checkbox) {
+    var item = checkbox.getAttribute("value");
+    if (item) {
+      txtData2 += item + "\n";
+    }
+  });
+  var finalText = txtHead1 + txtData1 + space + txtHead2 + txtData2;
+  var outputElement = document.createElement("pre");
+  outputElement.textContent = finalText;
+  document.body.appendChild(outputElement);
+  var blob = new Blob([finalText], { type: "text;charset=utf-8" });
+  var url = URL.createObjectURL(blob);
+  var link = document.createElement("a");
+  link.href = url;
+  link.download = "buylist.txt";
+  link.click();
+}
+</script>
+</body>
+
+</html>

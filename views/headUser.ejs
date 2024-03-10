@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>Creative - <%= pageTitle %></title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+          html {
+    background-image: url(../images/bg_img.jpg);
+    background-color: #c0caca;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: fit-content;
+}
+
+footer {
+    background-color: #f2f2f2;
+    padding: 20px;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}
+
+
+
+/* navbar */
+.topnav {
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, .6);
+}
+
+.topnav a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 0px;
+    text-decoration: none;
+    font-size: 17px;
+    width: 120px;
+}
+
+.topnav .icon {
+    display: none;
+    color: #000;
+}
+
+.nav-right {
+    float: right;
+}
+
+.drop1,
+.drop2 {
+    float: right;
+    overflow: hidden;
+}
+
+.drop1 .btn1,
+.drop2 .btn2,
+.topnav .btn3 {
+    font-size: 17px;
+    border: none;
+    outline: none;
+    color: black;
+    padding: 14px 16px;
+    background-color: rgba(255, 255, 255, .1);
+    font-family: inherit;
+    margin: 0;
+    width: 120px;
+}
+
+.con1,
+.con2 {
+    display: none;
+    position: absolute;
+    background-color: rgba(255, 255, 255, .6);
+    width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.con2 {
+    width: 240px;
+}
+
+.con1 a,
+.con2 a,
+.con1 button,
+.con2 button {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    display: block;
+    width: 120px;
+    border: none;
+}
+
+.topnav a:hover,
+.drop1:hover .btn1,
+.drop2:hover .btn2,
+.topnav .btn3:hover {
+    background-color: #555;
+    color: white;
+    opacity: 1;
+}
+
+.topnav a .icon:hover {
+    background-color: #555;
+    color: white;
+    width: auto;
+}
+
+.con1 a:hover,
+.con2 a:hover,
+.con1 button:hover,
+.con2 button:hover {
+    background-color: #555;
+    color: white;
+    width: 120px;
+}
+
+.show {
+    display: block;
+}
+
+@media screen and (max-width: 752px) {
+
+    .topnav a:not(:first-child),
+    .drop1 .btn1,
+    .drop2 .btn2,
+    .topnav .btn3 {
+        display: none;
+    }
+
+    .topnav a.icon {
+        float: right;
+        display: block;
+    }
+}
+
+@media screen and (max-width:752px) {
+    .topnav.responsive {
+        position: relative;
+    }
+
+    .topnav.responsive .icon {
+        position: absolute;
+        right: 20px;
+        top: 0;
+        width: 20px;
+    }
+
+    .topnav.responsive a {
+        float: none;
+        padding: 16px 0px;
+        padding-left: 18px;
+        width: auto;
+        display: block;
+        text-align: left;
+    }
+
+    .topnav.responsive .drop1,
+    .topnav.responsive .drop2 {
+        float: none;
+    }
+
+    .topnav.responsive .con1,
+    .topnav.responsive .con2 {
+        position: relative;
+    }
+
+    .topnav.responsive .drop1 .btn1,
+    .topnav.responsive .drop2 .btn2,
+    .topnav.responsive .btn3 {
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+}
+
+div>span {
+    display: block;
+    font-size: larger;
+    text-align: center;
+    padding: 40px;
+    color: black;
+    margin-left: 20px;
+    margin-right: 60px;
+    align-items: center;
+}
+
+/* Search Page */
+.search-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    height: 45vh;
+    gap: 30px;
+}
+
+.search-container button[id="sbtn"] {
+    background-color: #ddd;
+    border-radius: 100px;
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.search-container button[id="sbtn"]:hover {
+    background: #ccc;
+    transform: scale(1.05) rotate(-1deg);
+}
+
+.search-container button[type="submit"] {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+.search-container button[type="submit"]:hover {
+    background: #ccc;
+}
+
+input[name="search"] {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    width: 400px;
+    border: none;
+}
+
+
+
+/* for recipe page */
+.g0 {
+    display: block;
+    font-size: larger;
+    text-align: center;
+    padding: 40px;
+    color: black;
+    margin: 80px;
+    align-items: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+.g1 {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto;
+    gap: 40px;
+    margin-left: 50px;
+    margin-right: 50px;
+    overflow-x: scroll;
+}
+
+.row {
+    display: flex;
+    overflow: auto;
+    padding: 19px 0px;
+}
+
+.column {
+    float: left;
+    padding: 0 10px;
+    transition: 0.5s;
+}
+
+.column:hover {
+    transform: scale(1.1);
+    z-index: 2;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, .6);
+    border-radius: 10px;
+
+}
+
+.container {
+    padding: 0 16px;
+}
+
+h4 {
+    margin: 10px;
+}
+
+.container::after,
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.title {
+    color: grey;
+    margin: 0px;
+    font-size: 11pt;
+}
+
+.button1 {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: rgba(0, 0, 0);
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+}
+
+@media screen and (max-width:660px) {
+    .g0 {
+        margin: 40px;
+    }
+}
+
+/* for verificaton page */
+.check {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px auto;
+    max-width: 500px;
+    padding: 20px 20px;
+}
+
+button[onclick="addcheck()"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 500px;
+}
+
+#d1 {
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+input[placeholder="Enter the sum of above two numbers"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 0 5px #ccc;
+    width: 500px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* for verification page */
+.fb {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px auto;
+    max-width: 600px;
+}
+
+.fbT {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 0 5px #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.fbB {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 600px;
+}
+
+.fbB:hover {
+    background-color: #0062cc;
+}
+
+.bb1 {
+    background-color: rgba(255, 255, 255, .6);
+    font-size: large;
+    padding: 6px 12px;
+}
+
+ul[type="square"] {
+    background-color: rgba(255, 255, 255, .6);
+    font-size: large;
+    font-weight: bold;
+}
+
+/* Login and signup form*/
+.formData {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.b1 {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+    border: none;
+}
+
+.container {
+    padding: 16px;
+    margin: 0px 0px 24px 0px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+
+    .cancelbtn {
+        width: 100%;
+    }
+}
+
+#serachResult {
+    display: flex;
+    flex-direction: row;
+}
+        </style>
+    </head>
+<body>
+  <div style="background-color:rgba(255, 255, 255, .6);text-align: center; font-size: xx-large;font-family: 'Times New Roman', Times, serif;font-weight: bolder;"><br>Creative - A place for different recipes</div>
+  <div style="background-color:rgba(255, 255, 255, .6);text-align: center; font-size: large;font-family: 'Times New Roman', Times, serif;font-weight: bold;"><br>"A recipe has no soul. YOU as the cook must bring SOUL to the recipe."<br><br></div>
+    <hr><div class="topnav" id="myTopnav">
+        <button class="btn3" onclick="redirectTo('/user/home', '<%= user.userID %>')">Home</button>
+        <button class="btn3" onclick="redirectTo('/user/aboutus', '<%= user.userID %>')">About</button>
+        <button class="btn3" onclick="redirectTo('/user/recipes', '<%= user.userID %>')">Recipes</button>
+        <button class="btn3" onclick="redirectTo('/user/search', '<%= user.userID %>')">Search</button>
+        <div class="drop1">
+          <button class="btn1" onclick="disp1()">Account <i class="fa fa-caret-down"></i></button>
+          <div class="con1" id="drop1">
+            <button onclick="redirectTo('/user/liked', '<%= user.userID %>')"><i class="fa fa-heart-o" style="font-size:15px"></i> Liked</button>
+            <button class="btn3" onclick = "alert('Please upgrade your account to add your own recipe!')" > + recipe</button>
+            <button class="btn3" onclick="redirectTo('/user/feedback', '<%= user.userID %>')">Feedback</button>
+            <button>Log Out</button>
+          </div>
+        </div> 
+        <div class="drop2">
+          <button class="btn2" onclick="disp2()">Profile <i class="fa fa-caret-down"></i></button>
+          <div class="con2" id="drop2">
+            <p><strong><%= user.fullName %></strong></p>
+            <h4><%= user.userID %></h4>
+            <p><%= user.type %></p>
+          </div>
+        </div> 
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+      </div>

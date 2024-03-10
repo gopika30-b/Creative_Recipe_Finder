@@ -1,0 +1,10 @@
+<%- include('headVchef.ejs') %>
+<div class="search-container">
+    <form action="/vchefs/search/result" method="get">
+        <input type="text" placeholder="Search.." name="search">
+        <input type="hidden" name="userID" value="<%= user.userID %>">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+    <button  onclick="redirectTo('/user/explore/ingredients', '<%= user.userID %>')" id="sbtn">By Ingredients</button>
+</div>
+<%- include('footVchef.ejs') %>
