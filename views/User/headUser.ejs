@@ -559,6 +559,7 @@ span.psw {
           <div class="con1" id="drop1">
             <button onclick="redirectTo('/user/liked', '<%= user.userID %>')"><i class="fa fa-heart-o" style="font-size:15px"></i> Liked</button>
             <button class="btn3" onclick = "alert('Please upgrade your account to add your own recipe!')" > + recipe</button>
+            <button class="btn3" onclick="redirectTo('/user/upgradeacc', '<%= user.userID %>')"> Upgarde Acc</button>
             <button class="btn3" onclick="redirectTo('/user/feedback', '<%= user.userID %>')">Feedback</button>
             <button>Log Out</button>
           </div>

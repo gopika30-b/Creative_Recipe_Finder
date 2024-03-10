@@ -1,0 +1,15 @@
+<%- include('headUser.ejs') %>
+
+<h1>Upgrade Account</h1>
+<img src="https://ik.imagekit.io/creativeRecipe/images/UPI.jpg?updatedAt=1710064048079" alt="UPI QR Code" style="width: 200px; height: 200px;">
+<form action="/user/submit-upi-transaction" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="userID" value="<%= user.userID %>">
+    <label for="transactionID">Transaction ID:</label>
+    <input type="text" id="transactionID" name="transactionID" required>
+    <br>
+    <label for="paymentScreenshot">Payment Screenshot:</label>
+    <input type="file" id="paymentScreenshot" name="paymentScreenshot" accept="image/*" required>
+    <br>
+    <button type="submit">Submit Transaction</button>
+</form>
+<%- include('footUser.ejs') %>

@@ -40,7 +40,7 @@ app.get("/home", function (req, res) {
 app.get("/user/home", async function (req, res) {
   const userID = req.query.userID;
   const user = await User.findOne({ userID: userID });
-  res.render("mainUser", {
+  res.render("User/mainUser", {
     pageTitle: "Home", user: user,
     pageContent: `
       <div><span><p style="padding: 20px; border: 3px solid black;margin: 70px">A recipe is a set of instructions that describes how to prepare or make a dish. If life could only be as simple as following a recipe, we'd all be much happier. However, unlike food based recipes, life doesn't provide you with standardized ingredients as each lives their unique life. It means we must cook with what we have and see what we can come up with it. However, just like cooking ...life has a lot of similarities. For instance, while some people like to follow the recipe to the core, others like to experiment with the ingredients creating their unique take on something that might have been passed down from generation to generation.</p></span></div>
@@ -70,7 +70,7 @@ app.get("/aboutus", function (req, res) {
 app.get("/user/aboutus", async function (req, res) {
   const userID = req.query.userID;
   const user = await User.findOne({ userID: userID });
-  res.render("mainUser", {
+  res.render("User/mainUser", {
     pageTitle: "About Us", user: user,
     pageContent: `
       <div> <span> <p style="padding: 20px; border: 3px solid black; margin: 70px">Hi I'm Gopika! the cook and writter behind this webpage. I've grown up in the kitchen along side my mum and grandmothers and conversations in my family are always about the next meal. I've picked up their love for food along the way, and with this webpage, I share my food story with you. Simply Recipes is here to help you cook delicious meals with less stress and more joy. We offer recipes and cooking advice for home cooks. Helping create “<b>KITCHEN WINS</b>” is what I am all about. Everyone is welcome at the Simply Recipes table: people of all races, religions, genders, sexual orientations, ages, backgrounds, and abilities. We strive to be a resource for every home cook, and I consciously work to make this inclusion felt in every part of the site. We're not perfect, but we hope to get more right than we get wrong. As we all know, cooking is not just about preparing meals; it's also a way to express ourselves, to show our creativity, and to connect with our emotions. Cooking can be a therapeutic activity that can help us deal with stress, anxiety, and other emotions that we may be experiencing. When we cook, we can focus on the task at hand and forget about our worries, even if it's just for a little while. The next time you step into the kitchen, take a moment to appreciate the emotional aspect of cooking and enjoy the process of creating something delicious and meaningful.</p></span></div><br><br>
@@ -104,7 +104,7 @@ app.get("/user/recipes", async function (req, res) {
     const userID = req.query.userID;
     const user = await User.findOne({ userID: userID });
     const Adminrecpies = await Recipe.find();
-    res.render('recipesUser', { pageTitle: "Recipes", user: user, Adminrecipes: Adminrecpies });
+    res.render('User/recipesUser', { pageTitle: "Recipes", user: user, Adminrecipes: Adminrecpies });
   } catch (error) {
     console.error('Error fetching events:', error);
     res.status(500).send('Internal Server Error');
@@ -126,7 +126,7 @@ app.get("/user/search", async function (req, res) {
   try {
     const userID = req.query.userID;
     const user = await User.findOne({ userID: userID });
-    res.render('searchUser', { pageTitle: "Search Recipe", user: user });
+    res.render('User/searchUser', { pageTitle: "Search Recipe", user: user });
   } catch (error) {
     console.error('Error fetching events:', error);
     res.status(500).send('Internal Server Error');
@@ -150,7 +150,7 @@ app.get('/user/search/result', async (req, res) => {
     const searchText = req.query.search;
     const recipes = await Recipe.find({ pageTitle: { $regex: searchText, $options: 'i' } });
     const userRecipes = await userRecipe.find({ pageTitle: { $regex: searchText, $options: 'i' } });
-    res.render('searchResultUser', { pageTitle: "Search Recipe", user: user, recipes: recipes, userRecipes: userRecipes });
+    res.render('User/searchResultUser', { pageTitle: "Search Recipe", user: user, recipes: recipes, userRecipes: userRecipes });
 
   } catch (error) {
     console.error('Error fetching recipes:', error);
@@ -182,7 +182,7 @@ app.get('/user/explore/ingredients', async (req, res) => {
       return acc;
     }, []);
     const distinctIngredients = [...new Set(allIngredients)].filter(ingredient => !['Salt', 'Oil'].includes(ingredient));
-    res.render('searchByIng', { pageTitle: 'Explore Ingredients', user: user, distinctIngredients });
+    res.render('User/searchByIng', { pageTitle: 'Explore Ingredients', user: user, distinctIngredients });
 
 
   } catch (error) {
@@ -221,7 +221,7 @@ app.get('/user/explore/ingredients/result', async (req, res) => {
     }, []);
     const distinctIngredients = [...new Set(allIngredients)].filter(ingredient => !['Salt', 'Oil'].includes(ingredient));
     const recipesFound = await Recipe.find({ 'ingredients.name': { $all: selectedIngredients } });
-    res.render('searchByIngResults', { pageTitle: 'Search Results', recipesFound, user, distinctIngredients });
+    res.render('User/searchByIngResults', { pageTitle: 'Search Results', recipesFound, user, distinctIngredients });
   } catch (err) {
     console.error(err);
     res.status(500).send('Internal Server Error');
@@ -253,7 +253,7 @@ app.get("/user/liked", async function (req, res) {
     const likedRecipeIds = user.liked;
     const Adminrecipes = await Recipe.find();
     const Userrecipes = await userRecipe.find();
-    res.render("likedUser", { user: user, pageTitle: "Liked List", likedRecipeIds, Adminrecipes, Userrecipes });
+    res.render("User/likedUser", { user: user, pageTitle: "Liked List", likedRecipeIds, Adminrecipes, Userrecipes });
   } catch (error) {
     console.error('Error fetching events:', error);
     res.status(500).send('Internal Server Error');
@@ -339,7 +339,7 @@ app.get("/feedback", function (req, res) {
 app.get("/user/feedback", async function (req, res) {
   const userID = req.query.userID;
   const user = await User.findOne({ userID: userID });
-  res.render("mainUser", {
+  res.render("User/mainUser", {
     pageTitle: "Feedback", user: user,
     pageContent: `
       <form class="fb">
@@ -461,6 +461,36 @@ app.post('/submit-recipe', upload.single('image'), async (req, res) => {
   }
 });
 
+app.get("/user/upgradeacc", async function (req, res) {
+  const userID = req.query.userID;
+  const user = await User.findOne({ userID: userID });
+  res.render("User/upgradeAccount", {
+    pageTitle: "Upgrade Account", user: user
+  });
+});
+const upiTransactionSchema = new mongoose.Schema({
+  userID: String,
+  transactionID: String,
+  paymentScreenshot: String 
+}, { collection: 'vchefUpgrade' });
+
+const UpiTransaction = mongoose.model('UpiTransaction', upiTransactionSchema);
+app.post('/user/submit-upi-transaction', upload.single('paymentScreenshot'), async (req, res) => {
+  try {
+      const { userID, transactionID } = req.body;
+      const paymentScreenshotPath = req.file.path; 
+      const newTransaction = new UpiTransaction({
+          userID: userID,
+          transactionID: transactionID,
+          paymentScreenshot: paymentScreenshotPath
+      });
+      await newTransaction.save();
+      res.send('UPI transaction details submitted successfully.');
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Error submitting UPI transaction details.');
+  }
+});
 app.get("/:page", async function (req, res) {
   try {
     const page = req.params.page;
@@ -490,7 +520,7 @@ app.get("/user/:page", async function (req, res) {
     const recipeSteps = recipe.recipeSteps;
     const pageTitle = recipe.pageTitle;
     const isLiked = user && user.liked.includes(String(recipe._id));
-    res.render("recipeInfoUser", { recipe: recipe, user: user, ingredients, recipeSteps, pageTitle, isLiked });
+    res.render("User/recipeInfoUser", { recipe: recipe, user: user, ingredients, recipeSteps, pageTitle, isLiked });
   } catch (err) {
     return res.status(500).json({ error: "An error occurred" });
   }
@@ -529,7 +559,7 @@ app.get("/user/search/:page", async function (req, res) {
     const recipeSteps = recipe.recipeSteps;
     const pageTitle = recipe.pageTitle;
     const isLiked = user && user.liked.includes(String(recipe._id));
-    res.render("recipeInfoUser", { recipe: recipe, user: user, ingredients, recipeSteps, pageTitle, isLiked });
+    res.render("User/recipeInfoUser", { recipe: recipe, user: user, ingredients, recipeSteps, pageTitle, isLiked });
   } catch (err) {
     return res.status(500).json({ error: "An error occurred" });
   }
@@ -586,7 +616,7 @@ app.get("/user/:page/buylist", async function (req, res) {
     }
     const ingredients = buylist.buylist;
     const pageTitle = buylist.pageTitleBL;
-    res.render("buylistUser", { user: user, ingredients, pageTitle });
+    res.render("User/buylistUser", { user: user, ingredients, pageTitle });
   } catch (err) {
     return res.status(500).json({ error: "An error occurred" });
   }
