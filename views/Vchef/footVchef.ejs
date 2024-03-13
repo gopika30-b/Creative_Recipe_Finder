@@ -97,37 +97,38 @@
         link.click();
     }
 
-function addNewIngredient() {
-    const ingredientsContainer = document.getElementById('ingredientsContainer');
-    const ingredientInputs = document.getElementById('ingredientInputs');
-    const newIngredientInput = document.createElement('div');
-    newIngredientInput.innerHTML = `
-        <input type="text" class="ingredient-input-name"  name="ingredientName" placeholder="Ingredient Name" required>
-        <input type="text" class="ingredient-input-quantity" name="ingredientQuantity" placeholder="Quantity" required>
-        <button type="button" onclick="removeIngredient(this)">Remove</button>
-    `;
-    ingredientsContainer.insertBefore(newIngredientInput, ingredientInputs.nextSibling);
-}
+    function removeIngredient(button) {
+        const ingredientInputs = button.parentElement;
+        ingredientInputs.parentElement.removeChild(ingredientInputs);
+    }
 
-function removeIngredient(button) {
-    const ingredientsContainer = document.getElementById('ingredientsContainer');
-    ingredientsContainer.removeChild(button.parentElement);
-}
-function addNewRecipeStep() {
-    const recipeStepsContainer = document.getElementById('recipeStepsContainer');
-    const recipeStepsInputs = document.getElementById('recipeStepsInputs');
-    const newStepInput = document.createElement('div');
-    newStepInput.innerHTML = `
-        <input type="text" class="recipe-step-input" name="recipeStep" placeholder="Recipe Step" required>
-        <button type="button" onclick="removeRecipeStep(this)">Remove</button>
-    `;
-    recipeStepsContainer.insertBefore(newStepInput, recipeStepsInputs.nextSibling);
-}
+    function addNewIngredient() {
+        const ingredientsContainer = document.getElementById('ingredientsContainer');
+        const ingredientInputs = document.getElementById('ingredientInputs');
+        const newIngredientInput = document.createElement('div');
+        newIngredientInput.innerHTML = `<div class="ingredientInputs">
+            <input type="text" class="ingredient-input" name="ingredientName" placeholder="Ingredient Name" required>
+            <input type="text" class="ingredient-input" name="ingredientQuantity" placeholder="Quantity" required>
+            <button type="button" onclick="removeIngredient(this)">Remove</button>
+        </div>`;
+        ingredientsContainer.insertBefore(newIngredientInput, ingredientInputs.nextSibling);
+    }
 
-function removeRecipeStep(button) {
-    const recipeStepsContainer = document.getElementById('recipeStepsContainer');
-    recipeStepsContainer.removeChild(button.parentElement);
-}
+    function removeRecipeStep(button) {
+        const recipeStepInput = button.parentElement;
+        recipeStepInput.parentElement.removeChild(recipeStepInput);
+    }
+
+    function addNewRecipeStep() {
+        const recipeStepsContainer = document.getElementById('recipeStepsContainer');
+        const recipeStepsInputs = document.getElementById('recipeStepsInputs');
+        const newStepInput = document.createElement('div');
+        newStepInput.innerHTML = `<div class="recipeStepsInputs">
+            <input type="text" class="recipe-step-input" name="recipeStep" placeholder="Recipe Step" required>
+            <button type="button" onclick="removeRecipeStep(this)">Remove</button>
+        </div>`;
+        recipeStepsContainer.insertBefore(newStepInput, recipeStepsInputs.nextSibling);
+    }
 </script>
 </body>
 

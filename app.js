@@ -622,7 +622,6 @@ app.get("/vchef/addrecipe", async function (req, res) {
 app.post('/submit-recipe', upload.single('image'), async (req, res) => {
   try {
     const { userID, recipeName, ingredientName, ingredientQuantity, recipeStep } = req.body;
-
     const ingredients = [];
     if (Array.isArray(ingredientName)) {
       for (let i = 0; i < ingredientName.length; i++) {
@@ -631,27 +630,20 @@ app.post('/submit-recipe', upload.single('image'), async (req, res) => {
         }
       }
     } else {
-      // If only one ingredient is provided
       if (ingredientName && ingredientQuantity) {
         ingredients.push({ name: ingredientName, quantity: ingredientQuantity });
       }
     }
-
-    // Convert recipeStep to an array
     const recipeSteps = Array.isArray(recipeStep) ? recipeStep : [recipeStep];
-
-    // Save the recipe data to the database
     const newRecipe = new userRecipe({
       userID: userID,
       recipeName: recipeName,
       ingredients: ingredients,
       recipeSteps: recipeSteps,
-      // Save the image path to imageURL
       imageURL: req.file.path
     });
     await newRecipe.save();
-
-    res.send('Recipe submitted successfully.');
+    res.redirect(`/user/recipes?userID=${userID}`);
   } catch (error) {
     console.error(error);
     res.status(500).send('Error submitting recipe.');
@@ -684,7 +676,7 @@ app.post('/user/submit-upi-transaction', upload.single('paymentScreenshot'), asy
       paymentScreenshot: paymentScreenshotPath
     });
     await newTransaction.save();
-    res.send('UPI transaction details submitted successfully.');
+    res.redirect(`/user/recipes?userID=${userID}`);
   } catch (error) {
     console.error(error);
     res.status(500).send('Error submitting UPI transaction details.');
@@ -999,35 +991,21 @@ app.post('/liked', async (req, res) => {
 app.post("/admin/accept", async function (req, res) {
   try {
       const userID = req.body.userID;
-      
-      // Update user type to 'vchef'
       await User.findOneAndUpdate({ userID: userID }, { type: "vchef" });
-      
-      // Remove the transaction from UpiTransaction collection
       await UpiTransaction.findOneAndDelete({ userID: userID });
-
-      // Redirect back to the validation page
       res.redirect(`/admin/validate?userID=${userID}`);
   } catch (error) {
       console.error("Error accepting transaction:", error);
-      // Handle error gracefully
       res.status(500).send("Internal Server Error");
   }
 });
-
-// Route for rejecting a transaction
 app.post("/admin/reject", async function (req, res) {
   try {
       const userID = req.body.userID;
-
-      // Remove the transaction from UpiTransaction collection
       await UpiTransaction.findOneAndDelete({ userID: userID });
-
-      // Redirect back to the validation page
       res.redirect(`/admin/validate?userID=${userID}`);
   } catch (error) {
       console.error("Error rejecting transaction:", error);
-      // Handle error gracefully
       res.status(500).send("Internal Server Error");
   }
 });

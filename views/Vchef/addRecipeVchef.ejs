@@ -1,35 +1,121 @@
 <%- include('headVchef.ejs') %>
-<h1>Create User Recipe</h1>
-<form action="/submit-recipe" method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="userID" value="<%= user.userID %>">
-    <label for="recipeName">Recipe Name:</label>
-    <input type="text" id="recipeName" name="recipeName" required>
-    <br>
+
+    <style>
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: rgba(249, 249, 249, 0.5);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #4caf50;
+            color: white;
+        }
+        button[type="submit"] {
+            width: 100%;
+            margin-top: 20px;
+        }
+        button[type="button"] {
+            background-color: #008cba;
+            margin-left: 10px;
+        }
+        .ingredient-input,
+        .recipe-step-input {
+            width: calc(50% - 5px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        #ingredientsContainer,
+        #recipeStepsContainer {
+            margin-bottom: 20px;
+        }
+        .ingredientInputs,
+        .recipeStepsInputs {
+            display: flex;
+            align-items: center;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        #image {
+            display: none;
+        }
+        #imageLabel {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+            background-color: #008cba;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+
+    <h1>Create User Recipe</h1>
+    <form action="/submit-recipe" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="userID" value="<%= user.userID %>">
+        <label for="recipeName">Recipe Name:</label>
+        <input type="text" id="recipeName" name="recipeName" required>
+        <br>
+
+        <div id="ingredientsContainer">
+            <label for="ingredients">Ingredients:</label>
+            <div id="ingredientInputs">
+                <div class="ingredientInputs">
+                  <input type="text" class="ingredient-input" name="ingredientName" placeholder="Ingredient Name"
+                    required>
+                <input type="text" class="ingredient-input" name="ingredientQuantity" placeholder="Quantity" required>
+                <button type="button" onclick="addNewIngredient()">Add Ingredient</button>  
+                </div>
     
-    <div id="ingredientsContainer">
-        <label for="ingredients">Ingredients:</label>
-        <div id="ingredientInputs">
-            <input type="text" class="ingredient-input" name="ingredientName" placeholder="Ingredient Name" required>
-            <input type="text" class="ingredient-input" name="ingredientQuantity" placeholder="Quantity" required>
-            <button type="button" onclick="addNewIngredient()">Add Ingredient</button>
+            </div>
         </div>
-    </div>
-    <br>
-    
-    <div id="recipeStepsContainer">
-        <label for="recipeSteps">Recipe Steps:</label>
-        <div id="recipeStepsInputs">
-            <input type="text" class="recipe-step-input" name="recipeStep" placeholder="Recipe Step" required>
-            <button type="button" onclick="addNewRecipeStep()">Add Step</button>
+        <br>
+
+        <div id="recipeStepsContainer">
+            <label for="recipeSteps">Recipe Steps:</label>
+            <div id="recipeStepsInputs">
+                <div class="recipeStepsInputs">
+                    <input type="text" class="recipe-step-input" name="recipeStep" placeholder="Recipe Step" required>
+                    <button type="button" onclick="addNewRecipeStep()">Add Step</button>
+                </div>
+
+            </div>
         </div>
-    </div>
-    <br>
+        <br>
 
-    <label for="image">Recipe Image:</label>
-    <input type="file" id="image" name="image" accept="image/*" required>
-    <br>
+        <label id="imageLabel" for="image">Choose Recipe Image</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+        <br>
 
-    <button type="submit">Submit Recipe</button>
-</form>
+        <button type="submit">Submit Recipe</button>
+    </form>
 
-<%- include('footVchef.ejs') %>
+    <%- include('footVchef.ejs') %>
