@@ -9,10 +9,10 @@
         <% if (recipe.category=="Snack" ) { %>
           <div class="column">
             <div class="card">
-              <img src="<%= recipe.imageSrc %>" alt="<%= recipe.pageTitle %>" width="200px" height="200px">
+              <img src="<%= recipe.imageSrc %>" alt="<%= recipe.recipeName %>" width="200px" height="200px">
               <div class="container">
                 <h4>
-                  <%= recipe.pageTitle %>
+                  <%= recipe.recipeName %>
                 </h4>
                 <p class="title">
                   <% recipe.hashtags.forEach(hash=> { %>
@@ -38,10 +38,10 @@
         <% if (recipe.category=="Indian recipe" ) { %>
           <div class="column">
             <div class="card">
-              <img src="<%= recipe.imageSrc %>" alt="<%= recipe.pageTitle %>" width="200px" height="200px">
+              <img src="<%= recipe.imageSrc %>" alt="<%= recipe.recipeName %>" width="200px" height="200px">
               <div class="container">
                 <h4>
-                  <%= recipe.pageTitle %>
+                  <%= recipe.recipeName %>
                 </h4>
                 <p class="title">
                   <% recipe.hashtags.forEach(hash=> { %>

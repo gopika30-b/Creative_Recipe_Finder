@@ -1,7 +1,7 @@
 <%- include('headAdmin.ejs') %>
 <div>
     <h1 style="text-align: center;" id="recipeTitle">
-        <%= recipe.pageTitle %>
+        <%= recipe.recipeName %>
         <i id="likeIcon" class="<%= isLiked ? 'fa fa-heart' : 'fa fa-heart-o' %>" style=" color:#FF4033;cursor: poi" onclick="likeUnlike('<%= user.userID %>', '<%= recipe._id %>')"></i>
     </h1>
 <table border="3" width="25%" align="center" cellpadding="3" cellspacing="5">
